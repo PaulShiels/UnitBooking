@@ -92,14 +92,6 @@ namespace BookinSystem.Controllers
         //    UserModel viewModel = new UserModel();
         //    return View(viewModel);
         //}
-        public ActionResult login(UserModel viewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
+        
     }
 }

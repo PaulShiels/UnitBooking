@@ -33,7 +33,10 @@
     ViewBag.Title = "User Details";
 }*@
 
-
+@*@{
+    ViewBag.Title = "Title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
 <link href="Content/RegFormStyle.css" rel="stylesheet">
 
 
@@ -59,37 +62,68 @@
             
             <input type="password" placeholder="Password" />*@
             @model BookinSystem.Models.UserModel
-            @Html.ValidationSummary()
+            @Html.ValidationSummary(true)
             @using (Html.BeginForm()) 
             {           
-                @Html.TextBoxFor(model => model.Email, new { @type = "email", @placeholder = "e-mail" })
+                @Html.AntiForgeryToken()
+                
                 @Html.ValidationMessageFor(model => model.Email)
-                @Html.TextBoxFor(model => model.Email, new { @type = "password", @placeholder = "Password" })             
+                <p>
+                @Html.TextBoxFor(model => model.Email, new { @type = "email", @placeholder = "e-mail" })
+                    </p>
+                @*@Html.EditorFor(model => model.Email, null, new { @class = "form-control" })*@
+                
                 @Html.ValidationMessageFor(model => model.Password)
+                <p>
+                    @Html.TextBoxFor(model => model.Password, new { @type = "password", @placeholder = "Password" })
+                    @*@Html.EditorFor(model => model.Password, null, new { @class = "form-control" })*@
+                </p>
 
-                @Html.ActionLink("Login", "login", "Account", null, new { @class = "submitButton", @type="submit" })
-                @Html.ActionLink("Register", "register", "Account", null, new { @class = "submitButton" })
+                <div class="btn-group btn-group-justified" style="width:80%">
+                    <div class="btn-group">
+                        <input type="submit" class="btn btn-info" onclick="validate();" value="Login">
+                    </div>
+                    <div class="btn-group">
+                        @Html.ActionLink("Register", "register", "Account", null, new { @class = "btn btn-info" })
+                    </div>
+                 </div>
+        
+        @*@Html.ActionLink("Login", "login", null, new { @class = "submitButton", @type = "submit", @onclick = "validate();" })*@
+        
 
 
-            @Html.ValidationSummary(true)
-            }
+        @Html.ValidationSummary(true)
+        }
 
-
-
-
-            @*<div class="checkboxy">
+        @*<div class="checkboxy">
                 <input name="cecky" id="checky" value="1" type="checkbox" /><label class="terms">I accept the terms of use</label>
             </div>*@
 
-            @*@Html.ActionLink("Login", "login", "AccountController", null, new { @class = "submitButton" })
+        @*@Html.ActionLink("Login", "login", "AccountController", null, new { @class = "submitButton" })
             @Html.ActionLink("Register", "register", "AccountController", null, new { @class = "submitButton" })*@
-            @*<a id="submit" href="#"></a>
+        @*<a id="submit" href="#"></a>
             <a id="submit" href="#">Register</a>*@
 
-        </div>
+    </div>
     </form>
     
 
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
+<script>
+    function validate() {
+        $.ajax({
+            url: @Url.Action("login"),
+            method: 'GET',
+            success: function(data) { 
+                if (data == "true"){
+                    alert(data);
+                }
+            }
+        });
+    }
+</script>
 
