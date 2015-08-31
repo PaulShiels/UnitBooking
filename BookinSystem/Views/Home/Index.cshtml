@@ -45,7 +45,7 @@
 
     <form id="signup">
 
-        <div>
+        <div id="LoginBoxTitle">
 
             <h3>Welcome To Bookings....</h3>
 
@@ -69,22 +69,30 @@
                 
                 @Html.ValidationMessageFor(model => model.Email)
                 <p>
-                @Html.TextBoxFor(model => model.Email, new { @type = "email", @placeholder = "e-mail" })
+                @Html.TextBoxFor(model => model.Email, new {@id="email", @type = "email", @placeholder = "e-mail" })
                     </p>
                 @*@Html.EditorFor(model => model.Email, null, new { @class = "form-control" })*@
                 
                 @Html.ValidationMessageFor(model => model.Password)
                 <p>
-                    @Html.TextBoxFor(model => model.Password, new { @type = "password", @placeholder = "Password" })
+                    @Html.TextBoxFor(model => model.Password, new {@id="password", @type = "password", @placeholder = "Password" })
                     @*@Html.EditorFor(model => model.Password, null, new { @class = "form-control" })*@
                 </p>
 
+                <div id="confirmPass" hidden="hidden">
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                    <p>
+                        @Html.TextBoxFor(model => model.ConfirmPassword, new { @type = "password", @placeholder = "Confirm Password" })
+                        @*@Html.EditorFor(model => model.Password, null, new { @class = "form-control" })*@
+                    </p>
+                </div>
                 <div class="btn-group btn-group-justified" style="width:80%">
-                    <div class="btn-group">
+                    <div id="loginBtn" class="btn-group">
                         <input type="submit" class="btn btn-info" onclick="validate();" value="Login">
                     </div>
-                    <div class="btn-group">
-                        @Html.ActionLink("Register", "register", "Account", null, new { @class = "btn btn-info" })
+                    <div id="registerBtn" class="btn-group">
+                        <input type="button" class="btn btn-info" onclick="register();" value="Register">
+                        @*@Html.ActionLink("Register", "register", "Account", null, new { @class = "btn btn-info" })*@
                     </div>
                  </div>
         
@@ -118,12 +126,33 @@
         $.ajax({
             url: @Url.Action("login"),
             method: 'GET',
-            success: function(data) { 
+            success: function(data) {
                 if (data == "true"){
                     alert(data);
                 }
             }
         });
+    };
+
+    function register() {
+        //$("#confirmPass").css("visibility", "visible");
+        $("#LoginBoxTitle").html("<h3> Sign Up with Bookings... </h3>");
+        $( "#confirmPass" ).slideDown( "slow", function() {
+            $( "#loginBtn" ).html('<input type="button" class="btn btn-info" onclick="regDetails();" value="Register"/>');
+                @*@Html.ActionLink("Register", "Create", "User", new { @id = ""}, new {@onclick="regDetails();" , @class = "btn btn-info" })');*@
+            $( "#registerBtn" ).html('<input type="button" class="btn btn-info" onclick="alreadyRegistered();" value="Already Registered?"/>');
+        });
+    };
+
+    function alreadyRegistered(){
+        $("#LoginBoxTitle").html("<h3> Welcome to Bookings... </h3>");
+        $( "#confirmPass" ).slideUp( "slow");
+        $( "#loginBtn" ).html('<input type="submit" class="btn btn-info" onclick="validate();" value="Login">');
+        $( "#registerBtn" ).html('<input type="button" class="btn btn-info" onclick="register();" value="Register">');
+    }
+
+    function regDetails() {
+        window.location.href = '@Url.Action( "Create", "User" )?email='+$('#email').val()+'&password='+$('#password').val();
     }
 </script>
 

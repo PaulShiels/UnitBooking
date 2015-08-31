@@ -11,8 +11,8 @@ namespace BookinSystem.Models
         public UserModelValidator()
         {
             RuleFor(x => x.Email).NotNull().WithMessage("Please enter an email address");
-
             RuleFor(x => x.Password).NotNull().WithMessage("Please enter your password");
+            RuleFor(x => x.ConfirmPassword).Equal(x => x.Password).WithMessage("Passwords must match");
         }
     }
 }

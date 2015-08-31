@@ -171,6 +171,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserModelValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -283,11 +284,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Register.cshtml" />
+    <Content Include="Views\User\WelcomeNewUser.cshtml">
+      <BrowseToURL>~/User/WelcomeNewUser</BrowseToURL>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Account\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
