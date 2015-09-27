@@ -5,48 +5,79 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="Content/RegFormStyle.css" rel="stylesheet">
-<h2>WelcomeNewUser</h2>
 
-<div>
-    <h4>UserModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+@*<link href="Content/RegFormStyle.css" rel="stylesheet">*@
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+<h2>Hi Jonny</h2>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+<h3>Book your unit...</h3>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+<div class="row">
+    <div class="col-md-6">
+        From<input type="text" class="some_class" readonly="readonly" value="" id="dateFrom" />
+    </div>
+    <div class="col-md-2">
+        
+    </div>
+    <div class="col-md-6">
+        To<input type="text" class="some_class" readonly="readonly" value="" id="dateTo" />
+    </div>
+ </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ConfirmPassword)
-        </dt>
+                <script>
 
-        <dd>
-            @Html.DisplayFor(model => model.ConfirmPassword)
-        </dd>
+                    //$('#datetimepicker_dark').datetimepicker({ theme: 'dark' })
+                    $('.some_class').datetimepicker({ theme: 'dark' });
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RegistrationDate)
-        </dt>
+                </script>
 
-        <dd>
-            @Html.DisplayFor(model => model.RegistrationDate)
-        </dd>
+                @*<div>
+                <h4>UserModel</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Password)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ConfirmPassword)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ConfirmPassword)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RegistrationDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.RegistrationDate)
+                    </dd>
+
+                </dl>
+            </div>*@
+                <p>
+                    @*@Html.ActionLink("Submit Reservation", "MakeReservation", null, new { @class = "btn btn-info" @click="regDetails();" })*@
+                    <input type="button" class="btn btn-info" onclick="regDetails();" value="Submit Reservation" />
+                    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+                    @Html.ActionLink("Back to List", "Index")*@
+                </p>
+
+<script>
+    function regDetails() {
+        window.location.href = '@Url.Action("MakeReservation")?dateFrom=' + $('#dateFrom').val() + '&dateTo=' + $('#dateTo').val();
+    }
+</script>

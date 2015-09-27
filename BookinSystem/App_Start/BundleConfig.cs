@@ -21,7 +21,8 @@ namespace BookinSystem
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.js",
-                      "~/Scripts/bootstrap/bootstrap-notify.js"));
+                      "~/Scripts/bootstrap/bootstrap-notify.js",
+                      "~/Scripts/jquery.datetimepicker.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
             //            "~/Scripts/bootstrap/bootstrap.js",
@@ -32,7 +33,11 @@ namespace BookinSystem
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/bootstrap.min.css",
-                      "~/Content/bootstrap-responsive.min.css"));
+                      "~/Content/bootstrap-responsive.min.css",
+                      "~/Content/stylish-portfolio.css",
+                      "~/Content/RegFormStyle.css",
+                      "~/Content/jquery.datetimepicker.css"));
+                      //"~/fonts/font-awesome/css/font-awesome.min.css"));
 
             //bundles.Add(new StyleBundle("~/bundles/css").Include(
             //          "~/Scripts/bootstrap.min.css",

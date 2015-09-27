@@ -1,0 +1,60 @@
+﻿@model BookinSystem.Models.ReservationDatesModel
+
+@{
+    ViewBag.Title = "EditReservation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditReservation</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>ReservationDatesModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.DateReservationId, htmlAttributes: new {@id="lblId", @class = "control-label col-md-2", @style = "visibility:Hidden" })*@
+            @Html.EditorFor(model => model.DateReservationId, new { htmlAttributes = new { @id = "lblId", @class = "form-control", @style = "visibility:visible" } })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                From<input type="text" class="some_class" readonly="readonly" value="" id="dateFrom" />
+                @*@Html.EditorFor(model => model.DateFrom, new { htmlAttributes = new {@id = "dateFrom", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateFrom, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateTo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                To<input type="text" class="some_class" readonly="readonly" value="" id="dateTo" />
+                @*@Html.EditorFor(model => model.DateTo, new { htmlAttributes = new { @id = "dateTo", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateTo, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input value="Save" onclick="Update();" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+    $('.some_class').datetimepicker({ theme: 'dark' });
+
+    function Update() {
+        window.location.href = '@Url.Action("UpdateReservation")?id='+ $('#lblId').val() + '&dateFrom=' + $('#dateFrom').val() + '&dateTo=' + $('#dateTo').val();
+    }
+</script>

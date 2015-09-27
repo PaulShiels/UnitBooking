@@ -1,0 +1,41 @@
+﻿@model List<BookinSystem.Models.ReservationDatesModel>
+
+@{
+    ViewBag.Title = "ConfirmReservations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Payment</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Date From: 
+        </th>
+        <th>
+            Date To: 
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit Reservation", "Edit", new { id = item.DateReservationId }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Delete Reservation", "Delete", new { id = item.DateReservationId }, new { @class = "btn btn-info" })
+        </td>
+    </tr>
+}
+
+</table>
+
+@Html.ActionLink("Pay", "Pay", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-info" })

@@ -171,6 +171,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReservationDatesModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserModelValidator.cs" />
@@ -188,6 +189,7 @@
     <Content Include="Content\Images\portfolio-2.jpg" />
     <Content Include="Content\Images\portfolio-3.jpg" />
     <Content Include="Content\Images\portfolio-4.jpg" />
+    <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\RegFormStyle.css" />
     <Content Include="Content\stylish-portfolio.css" />
     <Content Include="favicon.ico" />
@@ -251,6 +253,8 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Scripts\DateTimePicker-MIT-LICENSE.txt" />
+    <Content Include="Scripts\datetimepicker.jquery.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -259,6 +263,7 @@
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.4-vsdoc.js" />
+    <Content Include="Scripts\jquery.datetimepicker.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -287,6 +292,8 @@
     <Content Include="Views\User\WelcomeNewUser.cshtml">
       <BrowseToURL>~/User/WelcomeNewUser</BrowseToURL>
     </Content>
+    <Content Include="Views\User\ConfirmReservations.cshtml" />
+    <Content Include="Views\User\EditReservation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

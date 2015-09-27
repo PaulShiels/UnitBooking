@@ -37,7 +37,7 @@
     ViewBag.Title = "Title";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }*@
-<link href="Content/RegFormStyle.css" rel="stylesheet">
+@*<link href="Content/RegFormStyle.css" rel="stylesheet">*@
 
 
     
@@ -152,7 +152,24 @@
     }
 
     function regDetails() {
-        window.location.href = '@Url.Action( "Create", "User" )?email='+$('#email').val()+'&password='+$('#password').val();
+        $.ajax({
+            url: '/User/Create',
+            type: 'POST',
+            data: {
+                email: $('#email').val(),
+                password: $('#password').val()
+            },
+            //contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                //alert(data.success);
+            },
+            error: function () {
+                //Send error to error table in database
+                //alert("error");
+            }
+        });
+
+        @*window.location.href = '@Url.Action( "Create", "User" )?email='+$('#email').val()+'&password='+$('#password').val();*@
     }
 </script>
 
