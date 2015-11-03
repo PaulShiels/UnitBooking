@@ -78,6 +78,22 @@
 
 <script>
     function regDetails() {
+        //$.ajax({
+        //    url: '/User/Create',
+        //    type: 'POST',
+        //    data: {
+        //        email: $('#email').val(),
+        //        password: $('#password').val()
+        //    },
+        //    //contentType: 'application/json; charset=utf-8',
+        //    success: function (data) {
+        //        //alert(data.success);
+        //    },
+        //    error: function () {
+        //        //Send error to error table in database
+        //        //alert("error");
+        //    }
+        //});
         window.location.href = '@Url.Action("MakeReservation")?dateFrom=' + $('#dateFrom').val() + '&dateTo=' + $('#dateTo').val();
     }
 </script>

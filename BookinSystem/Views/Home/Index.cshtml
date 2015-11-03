@@ -160,8 +160,10 @@
                 password: $('#password').val()
             },
             //contentType: 'application/json; charset=utf-8',
-            success: function (data) {
+            success: function (response) {
                 //alert(data.success);
+                if (response.result == 'Redirect')
+                    window.location = response.url;
             },
             error: function () {
                 //Send error to error table in database

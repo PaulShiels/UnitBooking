@@ -30,7 +30,7 @@
             @Html.DisplayFor(modelItem => item.DateTo)
         </td>
         <td>
-            @Html.ActionLink("Edit Reservation", "Edit", new { id = item.DateReservationId }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Edit Reservation", "Edit", new { id = item.DateReservationId}, new { @class = "btn btn-info" }) |
             @Html.ActionLink("Delete Reservation", "Delete", new { id = item.DateReservationId }, new { @class = "btn btn-info" })
         </td>
     </tr>
@@ -38,4 +38,4 @@
 
 </table>
 
-@Html.ActionLink("Pay", "Pay", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-info" })
+@Html.ActionLink("Pay", "Index", "SecurePayment", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-info" })

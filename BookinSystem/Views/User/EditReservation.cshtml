@@ -41,20 +41,41 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input value="Save" onclick="Update();" class="btn btn-default" />
+                <label onclick="Update();" class="btn btn-default" >Save</label>
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Back to List", "Index")*@
 </div>
 
 <script>
     $('.some_class').datetimepicker({ theme: 'dark' });
 
     function Update() {
-        window.location.href = '@Url.Action("UpdateReservation")?id='+ $('#lblId').val() + '&dateFrom=' + $('#dateFrom').val() + '&dateTo=' + $('#dateTo').val();
+        //$.ajax({
+        //    url: '/User/UpdateReservation',
+        //    type: 'POST',
+        //    data: {
+        //        id: $('#lblId').val(),
+        //        dateFrom: $('#dateFrom').val(),
+        //        dateTo: $('#dateTo').val()
+        //    },
+        //    //contentType: 'application/json; charset=utf-8',
+        //    success: function (data) {
+        //        //alert(data.success);
+        //    },
+        //    error: function () {
+        //        //Send error to error table in database
+        //        //alert("error");
+        //    }
+        //});
+
+        //Validate date
+        //Submit altered date
+        window.location.href = '@Url.Action("UpdateReservation")?id=' + $('#lblId').val() + '&dateFrom=' + $('#dateFrom').val() + '&dateTo=' + $('#dateTo').val();
+        alert("HIT");
     }
 </script>
