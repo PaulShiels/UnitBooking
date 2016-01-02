@@ -1,0 +1,290 @@
+﻿
+
+@*@Html.ValidationSummary(true)
+
+@model BookinSystem.Models.UserModel
+@{
+    ViewBag.Title = "User Details";
+}*@
+
+@*@{
+    ViewBag.Title = "Title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+@*<link href="Content/RegFormStyle.css" rel="stylesheet">*@
+
+
+    @model BookinSystem.Models.UserModel
+<div class="container">
+
+    <form id="signup" style="background:lightGreen">
+
+        <div id="LoginBoxTitle">
+
+            <h3>Welcome To Bookings....</h3>
+
+            @*<p>You want to fill out this form</p>*@
+
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="inputs">
+
+            @*@using (Html.BeginForm())
+            {
+            <input type="email" placeholder="e-mail" autofocus />
+            
+            <input type="password" placeholder="Password" />*@
+            <div id="loadingDiv" style="visibility:collapse; position:absolute">
+                <img src="~/Content/Images/loading.gif" />
+            </div>
+            
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+                @*@Html.ValidationSummary(false, "Error")*@
+                <div id="LoginContainer" style="visibility:visible" >
+                    
+                    @*@Html.ValidationMessageFor(model => model.Email)
+                    <p>
+                        @Html.TextBoxFor(model => model.Email, new { @id = "email", @type = "email", @placeholder = "e-mail" })
+                    </p>
+                    @Html.EditorFor(model => model.Email, null, new { @class = "form-control" })*@
+
+                    @*@Html.ValidationMessageFor(model => model.Password)*@
+                    @*<p>
+                        @Html.TextBoxFor(model => model.Password, new { @id = "password", @type = "password", @placeholder = "Password" })
+                        @Html.EditorFor(model => model.Password, null, new { @class = "form-control" })
+                    </p>*@
+                   
+                    @*@Html.AntiForgeryToken()*@
+                    @*@Html.ValidationSummary(true) , "Error") @*"Login Failed, Please check your Login Details")*@
+                    <div id="loginFailedDiv" style="visibility:collapse; color:darkred"></div>
+                    
+                    @*<div>*@
+                        <fieldset>
+                            <legend>Please Log In</legend>
+
+                            @*<div>@Html.LabelFor(u => u.Email)</div>*@
+                            <div>
+                                @*@Html.TextBoxFor(u => u.Email)*@
+                                @Html.ValidationMessageFor(model => model.Email)
+                                <p>@Html.TextBoxFor(model => model.Email, new { @id = "loginEmail", @type = "email", @placeholder = "e-mail" })</p>
+                            </div>
+
+                            @*<div>@Html.LabelFor(u => u.Password)</div>*@
+                            <div id="loginPasswordField">
+                                @*@Html.PasswordFor(u => u.Password)*@
+                                @Html.ValidationMessageFor(model => model.Password)
+                                <p>@Html.TextBoxFor(model => model.Password, new { @id = "loginPassword", @type = "password", @placeholder = "Password" })</p>
+                            </div>
+                            @*<input type="submit" value="Log In" />*@
+                            <input type="button" class="btn btn-info" value="Login" onclick="Login()">
+                            <input type="button" class="btn btn-info" onclick="showReg();" value="Register">
+                        </fieldset>
+                    @*</div>*@
+                </div>
+            @*}*@
+                
+            
+            @*@using (Html.BeginForm("Registration", "User", FormMethod.Post))*@
+            //{
+                @*@Html.ValidationSummary(true)*@
+                <div id="RegisterContainer" hidden="hidden" style="background:lightblue">
+                    <div id="registrationFailedDiv" style="visibility:collapse; color:red"></div>
+                    <fieldset>
+                        <legend>Please Register</legend>
+
+                        @*<div>@Html.LabelFor(u => u.Email)</div>*@
+                        <div>
+                            @*@Html.TextBoxFor(u => u.Email)*@
+                            @Html.ValidationMessageFor(model => model.Email)
+                            <p>@Html.TextBoxFor(model => model.Email, new { @id = "regEmail", @type = "email", @placeholder = "e-mail" })</p>
+                        </div>
+
+                        @*<div>@Html.LabelFor(u => u.Password)</div>*@
+                        <div>
+                            @*@Html.PasswordFor(u => u.Password)*@
+                            @Html.ValidationMessageFor(model => model.Password)
+                            <p>@Html.TextBoxFor(model => model.Password, new { @id = "regPassword", @type = "password", @placeholder = "Password" })</p>                           
+                        </div>                       
+                        <div>
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                            <p>@Html.TextBoxFor(model => model.ConfirmPassword, new { @type = "password", @placeholder = "Confirm Password" })</p>
+                            @*@Html.EditorFor(model => model.Password, null, new { @class = "form-control" })*@
+                        </div>
+                        @*<input type="submit" value="Register" />*@
+                        <input type="button" class="btn btn-info" value="Register" onclick="registerUser()">
+                        <input type="button" class="btn btn-info" onclick="showLogin();" value="Already Registered">
+                    </fieldset>
+                </div>
+            }
+                    
+        
+        @*@Html.ActionLink("Login", "login", null, new { @class = "submitButton", @type = "submit", @onclick = "validate();" })*@
+        
+
+
+        @*@Html.ValidationSummary(true)*@
+        @*}*@
+
+        @*<div class="checkboxy">
+                <input name="cecky" id="checky" value="1" type="checkbox" /><label class="terms">I accept the terms of use</label>
+            </div>*@
+
+        @*@Html.ActionLink("Login", "login", "AccountController", null, new { @class = "submitButton" })
+            @Html.ActionLink("Register", "register", "AccountController", null, new { @class = "submitButton" })*@
+        @*<a id="submit" href="#"></a>
+            <a id="submit" href="#">Register</a>*@
+
+    </div>
+    </form>
+    
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    function registerUser()
+    {
+        $('#loadingDiv').css("visibility", "visible");
+        $.ajax({
+            url: '/Account/Registration',
+            type: 'POST',
+            data: {
+                email: $('#regEmail').val(),
+                password: $('#regPassword').val()
+            },
+            //contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+                if (response.result == "error")
+                {
+                    $('#loadingDiv').css("visibility", "hidden");
+                    $('#registrationFailedDiv').css("visibility", "visible").html(response.message);
+                }
+                if (response.result == 'Redirect')
+                    window.location = response.url;
+            },
+            error: function () {
+                //Send error to error table in database
+                //alert("error");
+            }
+        });
+    }
+
+    function Login()
+    {
+        $('#loadingDiv').css("visibility", "visible");
+        var UserModel =
+            {
+                "Email" : $('#loginEmail').val(),
+                "Password" : $('#loginPassword').val()
+            }
+
+        $.ajax({
+            url: '/Account/Login',
+            type: 'POST',
+            data: JSON.stringify(UserModel),
+            //    {
+            //    email: $('#loginEmail').val(),
+            //    password: $('#loginPassword').val()
+            //},
+            contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+                if (response.result == "error")
+                {
+                    $('#loadingDiv').css("visibility", "hidden");
+                    $('#loginFailedDiv').css("visibility", "visible").html(response.message);;
+                }
+                //alert(response.message);
+                if (response.result == 'Redirect')
+                    window.location = response.url;
+            },
+            error: function (error) {
+                //Send error to error table in database
+            }
+        });
+    }
+
+    function showLogin()
+    {
+        $('#RegisterContainer').slideUp();
+        $('#LoginContainer').css("visibility", "visible");
+        $('#LoginContainer').slideDown();
+        $('#signup').css("background", "lightGreen");
+        $('#loginPassword').val("");
+    }
+
+    function showReg()
+    {
+        $('#LoginContainer').slideUp('normal', function(){
+            $('#loginPassword').val($('#regPassword').val());
+        });
+        $('#RegisterContainer').css("visibility", "visible");
+        $('#RegisterContainer').slideDown();
+        $('#signup').css("background", "lightBlue");
+
+
+    }
+
+    //When the registration password set the same password on the login password page to allow validation to work properly
+    $( "#regPassword" ).change(function() {
+        $('#loginPassword').val($('#regPassword').val());
+    });
+
+    function validate() {
+        $.ajax({
+            url: @Url.Action("login"),
+            method: 'GET',
+            success: function(data) {
+                if (data == "true"){
+                    alert(data);
+                }
+            }
+        });
+    };
+
+    function register() {
+        //$("#confirmPass").css("visibility", "visible");
+        $("#LoginBoxTitle").html("<h3> Sign Up with Bookings... </h3>");
+        $( "#confirmPass" ).slideDown( "slow", function() {
+            $( "#loginBtn" ).html('<input type="button" class="btn btn-info" onclick="regDetails();" value="Register"/>');
+            @*@Html.ActionLink("Register", "Create", "User", new { @id = ""}, new {@onclick="regDetails();" , @class = "btn btn-info" })');*@
+            $( "#registerBtn" ).html('<input type="button" class="btn btn-info" onclick="alreadyRegistered();" value="Already Registered?"/>');
+        });
+    }
+
+    function alreadyRegistered(){
+        $("#LoginBoxTitle").html("<h3> Welcome to Bookings... </h3>");
+        $( "#confirmPass" ).slideUp( "slow");
+        $( "#loginBtn" ).html('<input type="submit" class="btn btn-info" onclick="validate();" value="Login">');
+        $( "#registerBtn" ).html('<input type="button" class="btn btn-info" onclick="register();" value="Register">');
+    }
+
+    function regDetails() {
+        $.ajax({
+            url: '/User/Create',
+            type: 'POST',
+            data: {
+                email: $('#email').val(),
+                password: $('#password').val()
+            },
+            //contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+                //alert(data.success);
+                if (response.result == 'Redirect')
+                    window.location = response.url;
+            },
+            error: function () {
+                //Send error to error table in database
+                //alert("error");
+            }
+        });
+
+        @*window.location.href = '@Url.Action( "Create", "User" )?email='+$('#email').val()+'&password='+$('#password').val();*@
+    }
+</script>
+

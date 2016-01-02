@@ -10,6 +10,7 @@ namespace BookinSystem.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
@@ -34,16 +35,22 @@ namespace BookinSystem.Controllers
         //    //return RedirectToAction("Index", "Home");
         //}
 
-        [JsAction()]
-        public JsonResult login()
-        {
-            if (ModelState.IsValid)
-            {
-                //navigate to logged in page
-                return Json("true");
-            }
-            else
-                return Json("false");
-        }
+        //[JsAction()]
+        //public JsonResult login()
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        //navigate to logged in page
+        //        return Json("true");
+        //    }
+        //    else
+        //        return Json("false");
+        //}
+
+        //[HttpGet]
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
     }
 }

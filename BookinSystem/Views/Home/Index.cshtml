@@ -1,177 +1,110 @@
-﻿@*<div>
-    <h1>asp.net</h1>
-    <p class="lead">asp.net is a free web framework for building great web sites and web applications using html, css, and javascript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">learn more &raquo;</a></p>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>getting started</h2>
-        <p>asp.net web api is a framework that makes it easy to build http services that reach
-        a broad range of clients, including browsers and mobile devices. asp.net web api
-        is an ideal platform for building restful applications on the .net framework.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?linkid=301870">learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>get more libraries</h2>
-        <p>nuget is a free visual studio extension that makes it easy to add, remove, and update libraries and tools in visual studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?linkid=301871">learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>web hosting</h2>
-        <p>you can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?linkid=301872">learn more &raquo;</a></p>
-    </div>
+﻿@model BookinSystem.Models.UserModel
 
-    
-</div>*@
-
-
-@*@Html.ValidationSummary(true)
-
-@model BookinSystem.Models.UserModel
 @{
-    ViewBag.Title = "User Details";
-}*@
-
-@*@{
-    ViewBag.Title = "Title";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}*@
+}
+
+
+
 @*<link href="Content/RegFormStyle.css" rel="stylesheet">*@
 
 
-    
-<div class="container">
+@if (User.Identity.IsAuthenticated)
+{
+<h2>Hi Jonny</h2>
 
-    <form id="signup">
+<h3>Book your unit...</h3>
 
-        <div id="LoginBoxTitle">
-
-            <h3>Welcome To Bookings....</h3>
-
-            @*<p>You want to fill out this form</p>*@
-
-        </div>
-
-        <div class="sep"></div>
-
-        <div class="inputs">
-            @*@using (Html.BeginForm())
-            {
-            <input type="email" placeholder="e-mail" autofocus />
-            
-            <input type="password" placeholder="Password" />*@
-            @model BookinSystem.Models.UserModel
-            @Html.ValidationSummary(true)
-            @using (Html.BeginForm()) 
-            {           
-                @*@Html.AntiForgeryToken()*@
-                
-                @Html.ValidationMessageFor(model => model.Email)
-                <p>
-                @Html.TextBoxFor(model => model.Email, new {@id="email", @type = "email", @placeholder = "e-mail" })
-                    </p>
-                @*@Html.EditorFor(model => model.Email, null, new { @class = "form-control" })*@
-                
-                @Html.ValidationMessageFor(model => model.Password)
-                <p>
-                    @Html.TextBoxFor(model => model.Password, new {@id="password", @type = "password", @placeholder = "Password" })
-                    @*@Html.EditorFor(model => model.Password, null, new { @class = "form-control" })*@
-                </p>
-
-                <div id="confirmPass" hidden="hidden">
-                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
-                    <p>
-                        @Html.TextBoxFor(model => model.ConfirmPassword, new { @type = "password", @placeholder = "Confirm Password" })
-                        @*@Html.EditorFor(model => model.Password, null, new { @class = "form-control" })*@
-                    </p>
-                </div>
-                <div class="btn-group btn-group-justified" style="width:80%">
-                    <div id="loginBtn" class="btn-group">
-                        <input type="submit" class="btn btn-info" onclick="validate();" value="Login">
-                    </div>
-                    <div id="registerBtn" class="btn-group">
-                        <input type="button" class="btn btn-info" onclick="register();" value="Register">
-                        @*@Html.ActionLink("Register", "register", "Account", null, new { @class = "btn btn-info" })*@
-                    </div>
-                 </div>
-        
-        @*@Html.ActionLink("Login", "login", null, new { @class = "submitButton", @type = "submit", @onclick = "validate();" })*@
-        
-
-
-        @Html.ValidationSummary(true)
-        }
-
-        @*<div class="checkboxy">
-                <input name="cecky" id="checky" value="1" type="checkbox" /><label class="terms">I accept the terms of use</label>
-            </div>*@
-
-        @*@Html.ActionLink("Login", "login", "AccountController", null, new { @class = "submitButton" })
-            @Html.ActionLink("Register", "register", "AccountController", null, new { @class = "submitButton" })*@
-        @*<a id="submit" href="#"></a>
-            <a id="submit" href="#">Register</a>*@
-
+<div class="row">
+    <div class="col-md-6">
+        From<input type="text" class="some_class" readonly="readonly" value="" id="dateFrom" />
     </div>
-    </form>
-    
+    <div class="col-md-2">
+        
+    </div>
+    <div class="col-md-6">
+        To<input type="text" class="some_class" readonly="readonly" value="" id="dateTo" />
+    </div>
+ </div>
+<br/>
+@Html.LabelFor(model => model.TotalPaymentDue, htmlAttributes: new { @class = "control-label col-md-2" })
 
-</div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+                <script>
+
+                    //$('#datetimepicker_dark').datetimepicker({ theme: 'dark' })
+                    $('.some_class').datetimepicker({ theme: 'dark' });
+
+                </script>
+
+                @*<div>
+                <h4>UserModel</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Password)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ConfirmPassword)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ConfirmPassword)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RegistrationDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.RegistrationDate)
+                    </dd>
+
+                </dl>
+            </div>*@
+                <p>
+                    @*@Html.ActionLink("Submit Reservation", "MakeReservation", null, new { @class = "btn btn-info" @click="regDetails();" })*@
+                    <input type="button" class="btn btn-info" onclick="regDetails();" value="Submit Reservation" />
+                    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+                    @Html.ActionLink("Back to List", "Index")*@
+                </p>
+}
+else
+{
+    
 }
 
 <script>
-    function validate() {
-        $.ajax({
-            url: @Url.Action("login"),
-            method: 'GET',
-            success: function(data) {
-                if (data == "true"){
-                    alert(data);
-                }
-            }
-        });
-    };
-
-    function register() {
-        //$("#confirmPass").css("visibility", "visible");
-        $("#LoginBoxTitle").html("<h3> Sign Up with Bookings... </h3>");
-        $( "#confirmPass" ).slideDown( "slow", function() {
-            $( "#loginBtn" ).html('<input type="button" class="btn btn-info" onclick="regDetails();" value="Register"/>');
-                @*@Html.ActionLink("Register", "Create", "User", new { @id = ""}, new {@onclick="regDetails();" , @class = "btn btn-info" })');*@
-            $( "#registerBtn" ).html('<input type="button" class="btn btn-info" onclick="alreadyRegistered();" value="Already Registered?"/>');
-        });
-    };
-
-    function alreadyRegistered(){
-        $("#LoginBoxTitle").html("<h3> Welcome to Bookings... </h3>");
-        $( "#confirmPass" ).slideUp( "slow");
-        $( "#loginBtn" ).html('<input type="submit" class="btn btn-info" onclick="validate();" value="Login">');
-        $( "#registerBtn" ).html('<input type="button" class="btn btn-info" onclick="register();" value="Register">');
-    }
-
     function regDetails() {
         $.ajax({
-            url: '/User/Create',
+            url: '/Reservation',
             type: 'POST',
             data: {
-                email: $('#email').val(),
-                password: $('#password').val()
+                dateFrom: $('#dateFrom').val(),
+                dateTo: $('#dateTo').val()
             },
             //contentType: 'application/json; charset=utf-8',
             success: function (response) {
                 //alert(data.success);
-                if (response.result == 'Redirect')
-                    window.location = response.url;
             },
             error: function () {
                 //Send error to error table in database
                 //alert("error");
             }
         });
-
-        @*window.location.href = '@Url.Action( "Create", "User" )?email='+$('#email').val()+'&password='+$('#password').val();*@
+        @*window.location.href = '@Url.Action("Reservation","MakeReservation")?dateFrom=' + $('#dateFrom').val() + '&dateTo=' + $('#dateTo').val();*@
     }
 </script>
-

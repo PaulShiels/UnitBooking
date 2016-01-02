@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="UnitBooking" Class="UnitBookingDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDb)\v11.0;Initial Catalog=UnitBooking;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="UnitBookingConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Slot" Member="Slots">
+    <Type Name="Slot">
+      <Column Name="SlotId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Reserved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DateFrom" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DateTo" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Qr" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Slot_Unit_Slot" Member="Unit_Slots" ThisKey="SlotId" OtherKey="SlotId" Type="Unit_Slot" />
+      <Association Name="User_Slot" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Unit" Member="Units">
+    <Type Name="Unit">
+      <Column Name="UnitId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Lattitude" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="Longitude" Type="System.String" DbType="NVarChar(11)" CanBeNull="true" />
+      <Association Name="Unit_Unit_Slot" Member="Unit_Slots" ThisKey="UnitId" OtherKey="UnitId" Type="Unit_Slot" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Unit_Slot" Member="Unit_Slots">
+    <Type Name="Unit_Slot">
+      <Column Name="SlotId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UnitId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Slot_Unit_Slot" Member="Slot" ThisKey="SlotId" OtherKey="SlotId" Type="Slot" IsForeignKey="true" />
+      <Association Name="Unit_Unit_Slot" Member="Unit" ThisKey="UnitId" OtherKey="UnitId" Type="Unit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="PasswordSalt" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="PaymentSuccessful" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RegistrationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="User_Slot" Member="Slots" ThisKey="UserId" OtherKey="UserId" Type="Slot" />
+    </Type>
+  </Table>
+</Database>

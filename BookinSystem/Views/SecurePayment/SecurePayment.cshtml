@@ -47,7 +47,6 @@
     // This identifies your website in the createToken call below
     Stripe.setPublishableKey('pk_test_nYwuhVNoNgmrLQ3J7otCEL7T');
     var stripeResponseHandler = function (status, response) {
-        alert("status = " + status);
         var $form = $('#payment-form');
         if (response.error) {
             // Show the errors on the form
@@ -56,7 +55,6 @@
         } else {
             // token contains id, last4, and card type
             var token = response.id;
-            alert(token);
             // Insert the token into the form so it gets submitted to the server
             $form.append($('<input type="hidden" name="stripeToken" />').val(token));
             // and re-submit

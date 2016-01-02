@@ -60,11 +60,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleCrypto">
+      <HintPath>..\packages\SimpleCrypto.0.3.30.26\lib\SimpleCrypto.dll</HintPath>
+    </Reference>
     <Reference Include="Stripe.net">
       <HintPath>..\packages\Stripe.net.4.2.1\lib\net40\Stripe.net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -75,6 +79,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -169,8 +174,10 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\SecurePaymentController.cs" />
-    <Compile Include="Models\SecurePaymentToken.cs" />
+    <Compile Include="Models\BookingPrincipal.cs" />
+    <Compile Include="Models\SecurePaymentViewModel.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -181,6 +188,11 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserModelValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitBooking.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnitBooking.dbml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -190,6 +202,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\bg.jpg" />
     <Content Include="Content\Images\callout.jpg" />
+    <Content Include="Content\Images\loading.gif" />
     <Content Include="Content\Images\portfolio-1.jpg" />
     <Content Include="Content\Images\portfolio-2.jpg" />
     <Content Include="Content\Images\portfolio-3.jpg" />
@@ -290,26 +303,38 @@
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Register.cshtml" />
-    <Content Include="Views\User\WelcomeNewUser.cshtml">
+    <Content Include="Views\Home\Index.cshtml">
       <BrowseToURL>~/User/WelcomeNewUser</BrowseToURL>
     </Content>
-    <Content Include="Views\User\ConfirmReservations.cshtml" />
+    <Content Include="Views\Reservation\ConfirmReservations.cshtml" />
     <Content Include="Views\User\EditReservation.cshtml" />
     <Content Include="Views\SecurePayment\SecurePayment.cshtml" />
+    <Content Include="Views\SecurePayment\PaymentSuccess.cshtml" />
+    <Content Include="UnitBooking.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>UnitBooking.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnitBooking.dbml.layout">
+      <DependentUpon>UnitBooking.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

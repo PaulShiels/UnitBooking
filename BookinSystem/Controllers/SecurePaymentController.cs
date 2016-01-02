@@ -29,48 +29,55 @@ namespace BookinSystem.Controllers
 
             else
             {
-                var myCharge = new StripeChargeCreateOptions();
-
-                // always set these properties
-                myCharge.Amount = 120;
-                myCharge.Currency = "eur";
-
-                // set this if you want to
-                myCharge.Description = "Charge it like it's hot";
-
-                // setting up the card
-                myCharge.Source = new StripeSourceOptions()
+                try
                 {
-                    // set this property if using a token
-                    TokenId = tokenString[0],
+                    var myCharge = new StripeChargeCreateOptions();
 
-                    // set these properties if passing full card details (do not
-                    // set these properties if you set TokenId)
-                    //Number = "4242424242424242",
-                    //ExpirationYear = "2022",
-                    //ExpirationMonth = "10",
-                    //AddressCountry = "US",                // optional
-                    //AddressLine1 = "24 Beef Flank St",    // optional
-                    //AddressLine2 = "Apt 24",              // optional
-                    //AddressCity = "Biggie Smalls",        // optional
-                    //AddressState = "NC",                  // optional
-                    //AddressZip = "27617",                 // optional
-                    //Name = "Joe Meatballs",               // optional
-                    //Cvc = "1223"                          // optional
-                };
+                    // always set these properties
+                    myCharge.Amount = 120;
+                    myCharge.Currency = "eur";
 
-                // set this property if using a customer
-                //myCharge.CustomerId = *customerId*;
+                    // set this if you want to
+                    myCharge.Description = "Charge it like it's hot";
 
-                // set this if you have your own application fees (you must have your application configured first within Stripe)
-                //myCharge.ApplicationFee = 25;
+                    // setting up the card
+                    myCharge.Source = new StripeSourceOptions()
+                    {
+                        // set this property if using a token
+                        TokenId = tokenString[0],
 
-                // (not required) set this to false if you don't want to capture the charge yet - requires you call capture later
-                myCharge.Capture = true;
+                        // set these properties if passing full card details (do not
+                        // set these properties if you set TokenId)
+                        //Number = "4242424242424242",
+                        //ExpirationYear = "2022",
+                        //ExpirationMonth = "10",
+                        //AddressCountry = "US",                // optional
+                        //AddressLine1 = "24 Beef Flank St",    // optional
+                        //AddressLine2 = "Apt 24",              // optional
+                        //AddressCity = "Biggie Smalls",        // optional
+                        //AddressState = "NC",                  // optional
+                        //AddressZip = "27617",                 // optional
+                        //Name = "Joe Meatballs",               // optional
+                        //Cvc = "1223"                          // optional
+                    };
 
-                var chargeService = new StripeChargeService();
-                StripeCharge stripeCharge = chargeService.Create(myCharge);
-                return View("SecurePayment");
+                    // set this property if using a customer
+                    //myCharge.CustomerId = *customerId*;
+
+                    // set this if you have your own application fees (you must have your application configured first within Stripe)
+                    //myCharge.ApplicationFee = 25;
+
+                    // (not required) set this to false if you don't want to capture the charge yet - requires you call capture later
+                    myCharge.Capture = true;
+
+                    var chargeService = new StripeChargeService();
+                    StripeCharge stripeCharge = chargeService.Create(myCharge);
+                    return View("PaymentSuccess");
+                }
+                catch
+                {
+                    return View("SecurePayment");
+                }
             }
         }
     }
